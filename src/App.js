@@ -1,17 +1,29 @@
-import logo from './logo.svg';
+import {BrowserRouter as Router, Route} from 'react-router-dom';
+import {createMuiTheme, MuiThemeProvider} from '@material-ui/core';
+import Main from './Pages/Main';
 import './App.css';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> lil
-        </p>
-      </header>
-    </div>
+export const theme = createMuiTheme({
+  primary: {
+    main: "#05121D",
+    light: "#00166A",
+    dark: "#0051A5",
+    contrastText: "#FFFFFF"
+  },
+  secondary: {
+    main: "#05121D",
+    light: "FFBA00",
+    dark: "#FFFFFF",
+    contrastText: "#FFFFFF"
+  }
+});
+
+export default function App(){
+  return(
+    <MuiThemeProvider theme={theme}>
+      <Router>
+        <Route exact path="/" component={Main} />
+      </Router>
+    </MuiThemeProvider>
   );
 }
-
-export default App;
