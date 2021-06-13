@@ -1,8 +1,10 @@
 import {BrowserRouter as Router, Route} from 'react-router-dom';
 import {createMuiTheme, MuiThemeProvider} from '@material-ui/core';
 import Main from './Pages/Main';
+import Search from './Pages/Search';
 import './App.css';
 
+//CHANGE LATER
 export const theme = createMuiTheme({
   primary: {
     main: "#05121D",
@@ -23,6 +25,7 @@ export default function App(){
     <MuiThemeProvider theme={theme}>
       <Router>
         <Route exact path="/" component={Main} />
+        <Route exact path="/Search" component={Search} />
       </Router>
     </MuiThemeProvider>
   );

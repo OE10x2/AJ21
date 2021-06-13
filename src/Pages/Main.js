@@ -24,7 +24,7 @@ class Main extends React.Component{
     render(){
         return(
             <React.Fragment>
-                <Typography variant="h1">TEST</Typography>
+                <Typography variant="h1">MAIN PAGE</Typography>
                 {this.state.values.map((value) => (
                     //For "variant", just a test to see if the output is different
                     <Typography key={value.mal_id} variant={value.mal_id !== 9379 ? "h5" : "body1"}>
