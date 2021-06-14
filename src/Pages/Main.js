@@ -7,7 +7,7 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import Box from '@material-ui/core/Box';
 import Grid from '@material-ui/core/Grid';
-import { Divider } from '@material-ui/core';
+import { Paper } from '@material-ui/core';
 const jikanjs = require('jikanjs');
 
 const drawerWidth = 200;
@@ -16,10 +16,20 @@ const useStyles = theme => ({
   root: {
     display: 'flex',
   },
+  paper: {
+    padding: theme.spacing(2),
+    margin: 'auto',
+    maxWidth: 500,
+  },
   content: {
     flexGrow: 1,
     padding: theme.spacing(3),
     marginLeft: drawerWidth,
+  },
+  image: {
+      border: '2px solid #555',
+      width: '100px',
+      height: 'auto',
   },
 });
 
@@ -32,7 +42,21 @@ class Main extends React.Component{
         //First load the userList
         const userList = await jikanjs.loadUser('OE10x2', 'animelist');
         //Only need "anime" component from userList
+        /*
         for (const element of userList.anime){
+            if (element.mal_id !== 9379){
+                this.setState({values: [...this.state.values, element]});
+            }else{
+                //Test if specific MAL ID can be recognized
+                const tempAnime = await jikanjs.loadAnime(element.mal_id);
+                //If so, load more information with "loadAnime" call with the ID
+                this.setState({values: [...this.state.values, tempAnime]});
+            }
+        }
+        */
+       //SMALLER TEST CASE
+        for (let i = 0; i < 10; i++){
+            const element = userList.anime[i];
             if (element.mal_id !== 9379){
                 this.setState({values: [...this.state.values, element]});
             }else{
@@ -55,7 +79,7 @@ class Main extends React.Component{
                             <Typography variant="h5" className={classes.title}>NAMES</Typography>
                             <List>
                                 {this.state.values.map((value) => (
-                                    <React.Fragment key={value.mal_id}>
+                                    <Paper elevation={5} className={classes.paper} key={value.mal_id + " PAPER"}>
                                         <ListItem key={value.mal_id + " ITEM"}>
                                             <ListItemText
                                                 primary={
@@ -65,10 +89,9 @@ class Main extends React.Component{
                                                 }
                                                 secondary={value.mal_id}
                                             />
-                                            <img key={value.mal_id + " IMAGE"} src={value.image_url} alt="new"/>
+                                            <img key={value.mal_id + " IMAGE"} src={value.image_url} alt="new" className={classes.image}/>
                                         </ListItem>
-                                        <Divider key={value.mal_id + " DIV"} variant='middle'/>
-                                    </React.Fragment>
+                                    </Paper>
                                 ))}
                             </List>
                         </Grid>
