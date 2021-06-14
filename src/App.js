@@ -4,7 +4,6 @@ import Main from './Pages/Main';
 import Search from './Pages/Search';
 import Header from './Components/Header';
 import SideBar from './Components/SideBar';
-import './App.css';
 
 //CHANGE LATER
 export const theme = createMuiTheme({
