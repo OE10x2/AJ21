@@ -47,8 +47,8 @@ class Search extends React.Component{
         values: [],
     };
     async componentDidMount(){
-        const anime40938 = await jikanjs.loadAnime(40938);
-        this.setState({values: anime40938});
+        const anime42938 = await jikanjs.loadAnime(42938);
+        this.setState({values: anime42938});
     }
     render(){
         const {classes} = this.props;
@@ -68,7 +68,7 @@ class Search extends React.Component{
                         {this.state.values.title}
                         </Typography>
                         <br />
-                        <Typography paragraph>{this.state.values.score}</Typography>
+                        <Typography paragraph>{this.state.values.score} - {this.state.values.scored_by}</Typography>
                         <Typography paragraph>{this.state.values.broadcast}</Typography>
                         <Typography paragraph>{this.state.values.status}</Typography>
                         <Button className={classes.button}>Read more</Button>

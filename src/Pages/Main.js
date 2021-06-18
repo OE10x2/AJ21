@@ -2,35 +2,20 @@ import React from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import ToolBar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemText from '@material-ui/core/ListItemText';
-import Box from '@material-ui/core/Box';
 import Grid from '@material-ui/core/Grid';
-import { Paper } from '@material-ui/core';
+import Paper from '@material-ui/core/Paper';
 const jikanjs = require('jikanjs');
 
 const drawerWidth = 200;
 
 const useStyles = theme => ({
-  root: {
-    display: 'flex',
-  },
-  paper: {
-    padding: theme.spacing(2),
-    margin: 'auto',
-    maxWidth: 500,
-  },
-  content: {
-    flexGrow: 1,
-    padding: theme.spacing(3),
-    marginLeft: drawerWidth,
-  },
-  image: {
-      border: '2px solid #555',
-      width: '100px',
-      height: 'auto',
-  },
+    content: {
+        marginLeft: drawerWidth,
+    },
+    paper: {
+        width: 230,
+        height: 400,
+    },
 });
 
 class Main extends React.Component{
@@ -71,32 +56,19 @@ class Main extends React.Component{
     render(){
         const {classes} = this.props;
         return(
-            <div className={classes.root}>
-                <main className={classes.content}>
-                    <ToolBar />
-                    <Box display="flex">
-                        <Grid item xs={12} md={6}>
-                            <Typography variant="h5" className={classes.title}>NAMES</Typography>
-                            <List>
-                                {this.state.values.map((value) => (
-                                    <Paper elevation={5} className={classes.paper} key={value.mal_id + " PAPER"}>
-                                        <ListItem key={value.mal_id + " ITEM"}>
-                                            <ListItemText
-                                                primary={
-                                                    <Typography color="primary" variant="body1">
-                                                        {value.title}
-                                                    </Typography>
-                                                }
-                                                secondary={value.mal_id}
-                                            />
-                                            <img key={value.mal_id + " IMAGE"} src={value.image_url} alt="new" className={classes.image}/>
-                                        </ListItem>
-                                    </Paper>
-                                ))}
-                            </List>
+            <div className={classes.content}>
+                <ToolBar />
+                <Typography variant="h5" className={classes.title}>NAMES</Typography>
+                <Grid container direction="row" spacing={2}>
+                    {this.state.values.map(value => (
+                        <Grid item key={value.mal_id + " ITEM"} xs={6} sm={3}>
+                            <Paper elevation={5} key={value.mal_id + " PAPER"} className={classes.paper}>
+                                {value.title}
+                                <img key={value.mal_id + " IMAGE"} src={value.image_url} alt="new"/>
+                            </Paper>
                         </Grid>
-                    </Box>
-                </main>
+                    ))}
+                </Grid>
             </div>
             );
     }
