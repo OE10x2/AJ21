@@ -10,7 +10,7 @@ import ListItemText from '@material-ui/core/ListItemText';
 import InboxIcon from '@material-ui/icons/MoveToInbox';
 import MailIcon from '@material-ui/icons/Mail';
 
-const drawerWidth = 200;
+const drawerWidth = 230;
 
 const useStyles = makeStyles(() => ({
   drawer: {
