@@ -6,6 +6,9 @@ import Grid from '@material-ui/core/Grid';
 import Card from '@material-ui/core/Card';
 import CardMedia from '@material-ui/core/CardMedia';
 import CardContent from '@material-ui/core/CardContent';
+import CardActions from '@material-ui/core/CardActions';
+import Button from '@material-ui/core/Button';
+import SaveIcon from '@material-ui/icons/Save';
 const jikanjs = require('jikanjs');
 
 const drawerWidth = 230;
@@ -27,6 +30,11 @@ const useStyles = () => ({
         paddingBottom: '66.66%', //For matching card height
         borderRadius: '16px', //For image border roundness
         transform: 'translateY(-16px)', //Fixing image position
+    },
+    nonMedia: {
+        display: 'flex', //Essential
+        flexDirection: 'column', //CardActions must align vertically with CardContent
+        justifyContent: 'space-between', //Keep CardActions at bottom
     },
 });
 
@@ -73,14 +81,33 @@ class Main extends React.Component{
                                 image={value.image_url}
                                 className={classes.media}
                                 />
-                                <CardContent>
-                                    <Typography variant="body2">
-                                        {value.mal_id}
-                                    </Typography>
-                                    <Typography color="primary" variant="h5">
-                                        {value.title}
-                                    </Typography>
-                                </CardContent>
+                                <div className={classes.nonMedia}>
+                                    <CardContent>
+                                        <Typography variant="body2">
+                                            {value.mal_id}
+                                        </Typography>
+                                        <Typography color="primary" variant="h5">
+                                            {value.title}
+                                        </Typography>
+                                    </CardContent>
+                                    <CardActions>
+                                        <Button
+                                        variant="contained"
+                                        color="primary"
+                                        className={classes.button}
+                                        startIcon={<SaveIcon />}
+                                        >
+                                            SAVE
+                                        </Button>
+                                        <Button
+                                        variant="outlined"
+                                        color="secondary"
+                                        className={classes.button}
+                                        >
+                                            LEARN MORE
+                                        </Button>
+                                    </CardActions>
+                                </div>
                             </Card>
                         </Grid>
                     ))}
