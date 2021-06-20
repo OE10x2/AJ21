@@ -1,6 +1,5 @@
 import React from 'react';
 import { withStyles } from '@material-ui/core/styles';
-import ToolBar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import Card from '@material-ui/core/Card';
@@ -41,6 +40,7 @@ const useStyles = () => ({
 class Main extends React.Component{
     state = {
         values: [],
+        length: -1,
     };
 
     async componentDidMount(){
@@ -53,7 +53,8 @@ class Main extends React.Component{
         }
         */
        //SMALLER TEST CASE
-        for (let i = 0; i < 10; i++){
+        this.setState({length: 100});
+        for (let i = 0; i < 100; i++){
             const element = userList.anime[i];
             this.setState({values: [...this.state.values, element]});
         }
@@ -61,58 +62,62 @@ class Main extends React.Component{
   
     render(){
         const {classes} = this.props;
+
+        if (this.state.values.length !== this.state.length){
+            return(
+                <Typography variant="h3">Loading...</Typography>
+            );
+        }
+
         return(
-            <div className={classes.root}>
-                <ToolBar />
-                <Grid container
-                direction="row"
-                spacing={2}
-                >
-                    {this.state.values.map(value => (
-                        <Grid item
-                        key={value.mal_id + " ITEM"}
-                        xs={12} sm={6}
+            <Grid container
+            direction="row"
+            spacing={2}
+            >
+                {this.state.values.map(value => (
+                    <Grid item
+                    key={value.mal_id + " ITEM"}
+                    xs={12} sm={6}
+                    >
+                        <Card
+                        key={value.mal_id + " CARD"}
+                        className={classes.content}
                         >
-                            <Card
-                            key={value.mal_id + " CARD"}
-                            className={classes.content}
-                            >
-                                <CardMedia
-                                image={value.image_url}
-                                className={classes.media}
-                                />
-                                <div className={classes.nonMedia}>
-                                    <CardContent>
-                                        <Typography variant="body2">
-                                            {value.mal_id}
-                                        </Typography>
-                                        <Typography color="primary" variant="h5">
-                                            {value.title}
-                                        </Typography>
-                                    </CardContent>
-                                    <CardActions>
-                                        <Button
-                                        variant="contained"
-                                        color="primary"
-                                        className={classes.button}
-                                        startIcon={<SaveIcon />}
-                                        >
-                                            SAVE
-                                        </Button>
-                                        <Button
-                                        variant="outlined"
-                                        color="secondary"
-                                        className={classes.button}
-                                        >
-                                            LEARN MORE
-                                        </Button>
-                                    </CardActions>
-                                </div>
-                            </Card>
-                        </Grid>
-                    ))}
-                </Grid>
-            </div>
+                            <CardMedia
+                            image={value.image_url}
+                            className={classes.media}
+                            />
+                            <div className={classes.nonMedia}>
+                                <CardContent>
+                                    <Typography variant="body2">
+                                        {value.mal_id}
+                                    </Typography>
+                                    <Typography color="primary" variant="h5">
+                                        {value.title}
+                                    </Typography>
+                                </CardContent>
+                                <CardActions>
+                                    <Button
+                                    variant="contained"
+                                    color="primary"
+                                    className={classes.button}
+                                    startIcon={<SaveIcon />}
+                                    >
+                                        SAVE
+                                    </Button>
+                                    <Button
+                                    variant="outlined"
+                                    color="secondary"
+                                    className={classes.button}
+                                    >
+                                        LEARN MORE
+                                    </Button>
+                                </CardActions>
+                            </div>
+                        </Card>
+                    </Grid>
+                ))}
+            </Grid>
             );
     }
 }

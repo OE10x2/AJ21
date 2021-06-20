@@ -4,7 +4,6 @@ import Card from '@material-ui/core/Card';
 import CardMedia from '@material-ui/core/CardMedia';
 import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
-import ToolBar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 const jikanjs = require('jikanjs');
 
@@ -53,28 +52,25 @@ class Search extends React.Component{
     render(){
         const {classes} = this.props;
         return(
-            <React.Fragment>
-                <ToolBar />
-                <Card className={classes.root}>
-                    <CardMedia
-                    className={classes.media}
-                    image={this.state.values.image_url}
-                    />
-                    <CardContent>
-                        <Typography variant="body2">
-                        {this.state.values.mal_id}
-                        </Typography>
-                        <Typography color="primary" variant="h5">
-                        {this.state.values.title}
-                        </Typography>
-                        <br />
-                        <Typography paragraph>{this.state.values.score} - {this.state.values.scored_by}</Typography>
-                        <Typography paragraph>{this.state.values.broadcast}</Typography>
-                        <Typography paragraph>{this.state.values.status}</Typography>
-                        <Button className={classes.button}>Read more</Button>
-                    </CardContent>
-                </Card>
-            </React.Fragment>
+            <Card className={classes.root}>
+                <CardMedia
+                className={classes.media}
+                image={this.state.values.image_url}
+                />
+                <CardContent>
+                    <Typography variant="body2">
+                    {this.state.values.mal_id}
+                    </Typography>
+                    <Typography color="primary" variant="h5">
+                    {this.state.values.title}
+                    </Typography>
+                    <br />
+                    <Typography paragraph>{this.state.values.score} - {this.state.values.scored_by}</Typography>
+                    <Typography paragraph>{this.state.values.broadcast}</Typography>
+                    <Typography paragraph>{this.state.values.status}</Typography>
+                    <Button className={classes.button}>Read more</Button>
+                </CardContent>
+            </Card>
         );
     }
 }
