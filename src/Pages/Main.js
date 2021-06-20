@@ -1,4 +1,5 @@
 import React from 'react';
+import { withRouter } from "react-router-dom";
 import { withStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
@@ -7,7 +8,7 @@ import CardMedia from '@material-ui/core/CardMedia';
 import CardContent from '@material-ui/core/CardContent';
 import CardActions from '@material-ui/core/CardActions';
 import Button from '@material-ui/core/Button';
-import SaveIcon from '@material-ui/icons/Save';
+import MoreHorizIcon from '@material-ui/icons/MoreHoriz';
 const jikanjs = require('jikanjs');
 
 const drawerWidth = 230;
@@ -40,30 +41,27 @@ const useStyles = () => ({
 class Main extends React.Component{
     state = {
         values: [],
-        length: -1,
+        length: -1, //Cannot be 0, as the array is empty initially as well
     };
+
+    //For the onClick action for "Learn More" buttons
+    handleLearnMore = (id) => this.props.history.push("/anime/" + id);
 
     async componentDidMount(){
         //First load the userList
         const userList = await jikanjs.loadUser('OE10x2', 'animelist');
         //Only need "anime" component from userList
-        /*
-        for (const element of userList.anime){
-            this.setState({values: [...this.state.values, element]});
-        }
-        */
-       //SMALLER TEST CASE
-        this.setState({length: 100});
-        for (let i = 0; i < 100; i++){
-            const element = userList.anime[i];
-            this.setState({values: [...this.state.values, element]});
-        }
+        //First, pass in the length of userList
+        this.setState({length: userList.anime.length});
+        //Next, pass in all Objects in the array for "anime" component
+        for (const e of userList.anime) this.setState({values: [...this.state.values, e]});
     }
   
     render(){
         const {classes} = this.props;
 
         if (this.state.values.length !== this.state.length){
+            //Make sure all Objects are loaded from API
             return(
                 <Typography variant="h3">Loading...</Typography>
             );
@@ -98,17 +96,11 @@ class Main extends React.Component{
                                 </CardContent>
                                 <CardActions>
                                     <Button
-                                    variant="contained"
-                                    color="primary"
-                                    className={classes.button}
-                                    startIcon={<SaveIcon />}
-                                    >
-                                        SAVE
-                                    </Button>
-                                    <Button
                                     variant="outlined"
                                     color="secondary"
+                                    startIcon={<MoreHorizIcon />}
                                     className={classes.button}
+                                    onClick={() => this.handleLearnMore(value.mal_id)}
                                     >
                                         LEARN MORE
                                     </Button>
@@ -122,4 +114,4 @@ class Main extends React.Component{
     }
 }
 
-export default withStyles(useStyles)(Main);
+export default withRouter(withStyles(useStyles)(Main));
