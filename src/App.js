@@ -30,7 +30,7 @@ export default function App(){
         <Header />
         <SideBar />
         <ToolBar />
-        <div style={{marginLeft: '230px'}}>
+        <div style={{ marginLeft: '230px' }}>
           <Route exact path="/" component={Main} />
           <Route exact path="/search" component={Search} />
           <Route path="/anime/:id" component={Anime} />

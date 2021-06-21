@@ -72,11 +72,11 @@ class Main extends React.Component{
             >
                 {this.state.values.map(value => (
                     <Grid item
-                    key={value.mal_id + " ITEM"}
+                    key={`${value.mal_id} ITEM`}
                     xs={12} sm={6}
                     >
                         <Card
-                        key={value.mal_id + " CARD"}
+                        key={`${value.mal_id} CARD`}
                         className={classes.content}
                         >
                             <CardMedia
@@ -93,7 +93,7 @@ class Main extends React.Component{
                                     </Typography>
                                 </CardContent>
                                 <CardActions>
-                                    <Link to={"/anime/" + value.mal_id}>
+                                    <Link to={`/anime/${value.mal_id}`}>
                                         <Button
                                         variant="outlined"
                                         color="secondary"
