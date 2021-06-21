@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { withStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
@@ -18,9 +19,6 @@ class Anime extends React.Component{
         general: {},
         stats: {},
     };
-
-    //For returning to main page
-    handleGoBack = () => this.props.history.push('/');
 
     async componentDidMount(){
         //First load the userList
@@ -44,12 +42,12 @@ class Anime extends React.Component{
         
         return(
             <React.Fragment>
-                <IconButton
-                color="primary"
-                onClick={this.handleGoBack}
-                >
-                    <ArrowBackIcon />
-                </IconButton>
+                <Link to="/">
+                    <IconButton color="primary">
+                        <ArrowBackIcon />
+                    </IconButton>
+                </Link>
+                
                 <Typography>{this.state.general.title}</Typography>
                 <img
                 src={this.state.general.image_url}

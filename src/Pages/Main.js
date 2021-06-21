@@ -1,5 +1,5 @@
 import React from 'react';
-import { withRouter } from "react-router-dom";
+import { withRouter, Link } from "react-router-dom";
 import { withStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
@@ -44,9 +44,6 @@ class Main extends React.Component{
         values: [],
         length: -1, //Cannot be 0, as the array is empty initially as well
     };
-
-    //For the onClick action for "Learn More" buttons
-    handleLearnMore = (id) => this.props.history.push('/anime/' + id);
 
     async componentDidMount(){
         //First load the userList
@@ -96,15 +93,16 @@ class Main extends React.Component{
                                     </Typography>
                                 </CardContent>
                                 <CardActions>
-                                    <Button
-                                    variant="outlined"
-                                    color="secondary"
-                                    startIcon={<MoreHorizIcon />}
-                                    className={classes.button}
-                                    onClick={() => this.handleLearnMore(value.mal_id)}
-                                    >
-                                        LEARN MORE
-                                    </Button>
+                                    <Link to={"/anime/" + value.mal_id}>
+                                        <Button
+                                        variant="outlined"
+                                        color="secondary"
+                                        startIcon={<MoreHorizIcon />}
+                                        className={classes.button}
+                                        >
+                                            LEARN MORE
+                                        </Button>
+                                    </Link>
                                 </CardActions>
                             </div>
                         </Card>
