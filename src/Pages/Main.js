@@ -24,6 +24,7 @@ const useStyles = () => ({
         height: '300px', //Limit card size
         paddingTop: '16px', //Round border for image
         paddingBottom: '16px', //Round border for image
+        boxShadow: '0px 14px 80px rgba(34, 35, 58, 0.2)', //Optional
     },
     media: {
         minWidth: '233px', //For all images to have same size
@@ -45,7 +46,7 @@ class Main extends React.Component{
     };
 
     //For the onClick action for "Learn More" buttons
-    handleLearnMore = (id) => this.props.history.push("/anime/" + id);
+    handleLearnMore = (id) => this.props.history.push('/anime/' + id);
 
     async componentDidMount(){
         //First load the userList
