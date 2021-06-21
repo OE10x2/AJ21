@@ -8,15 +8,11 @@ import CardMedia from '@material-ui/core/CardMedia';
 import CardContent from '@material-ui/core/CardContent';
 import CardActions from '@material-ui/core/CardActions';
 import Button from '@material-ui/core/Button';
+import LinearProgress from '@material-ui/core/LinearProgress';
 import MoreHorizIcon from '@material-ui/icons/MoreHoriz';
 const jikanjs = require('jikanjs');
 
-const drawerWidth = 230;
-
 const useStyles = () => ({
-    root: {
-        marginLeft: drawerWidth, //Move all content to avoid being hidden
-    },
     content: {
         display: 'flex', //Formatting card
         borderRadius: '16px', //For card border roundness
@@ -60,9 +56,7 @@ class Main extends React.Component{
 
         if (this.state.values.length !== this.state.length){
             //Make sure all Objects are loaded from API
-            return(
-                <Typography variant="h3">Loading...</Typography>
-            );
+            return <LinearProgress />;
         }
 
         return(
@@ -86,7 +80,7 @@ class Main extends React.Component{
                             <div className={classes.nonMedia}>
                                 <CardContent>
                                     <Typography variant="body2">
-                                        {value.mal_id}
+                                        {value.type}
                                     </Typography>
                                     <Typography color="primary" variant="h5">
                                         {value.title}

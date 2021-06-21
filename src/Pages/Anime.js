@@ -4,14 +4,11 @@ import { withStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
+import LinearProgress from '@material-ui/core/LinearProgress';
 const jikanjs = require('jikanjs');
 
-const drawerWidth = 230;
-
 const useStyles = () => ({
-    root: {
-        marginLeft: drawerWidth, //Move all content to avoid being hidden
-    },
+    
 });
 
 class Anime extends React.Component{
@@ -28,16 +25,9 @@ class Anime extends React.Component{
     }
 
     render(){
-        if (!this.state.general.aired || !this.state.stats.scores){
+        if (!this.state.general.aired){
             //Objects not finished loading yet
-            return(
-                <React.Fragment>
-                    <Typography variant="h3">Loading...</Typography>
-                    <Typography paragraph>
-                        Please allow up to 5 seconds for the content to load.
-                    </Typography>
-                </React.Fragment>
-            )
+            return <LinearProgress />;
         }
         
         return(
@@ -48,17 +38,18 @@ class Anime extends React.Component{
                     </IconButton>
                 </Link>
                 
-                <Typography>{this.state.general.title}</Typography>
-                <img
-                src={this.state.general.image_url}
-                alt={this.state.general.mal_id}
-                />
+                <Typography variant="h5">{this.state.general.title}</Typography>
+                <Typography variant="h6" color="primary">{this.state.general.score}</Typography>
                 <Typography paragraph>
                     {this.state.general.synopsis}
                 </Typography>
                 <Typography color="primary">
                     {this.state.stats.scores["1"].votes} {this.state.general.aired.string}
                 </Typography>
+                <img
+                src={this.state.general.image_url}
+                alt={this.state.general.mal_id}
+                />
             </React.Fragment>
         );
     }
