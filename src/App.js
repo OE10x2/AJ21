@@ -1,5 +1,5 @@
-import {HashRouter as Router, Route} from 'react-router-dom';
-import {createMuiTheme, MuiThemeProvider} from '@material-ui/core';
+import { HashRouter, Route, Switch } from 'react-router-dom';
+import { createMuiTheme, MuiThemeProvider } from '@material-ui/core';
 import Main from './Pages/Main';
 import Search from './Pages/Search';
 import Anime from './Pages/Anime';
@@ -26,16 +26,18 @@ export const theme = createMuiTheme({
 export default function App(){
   return(
     <MuiThemeProvider theme={theme}>
-      <Router>
+      <HashRouter basename='/'>
         <Header />
         <SideBar />
         <ToolBar />
         <div style={{ marginLeft: '230px' }}>
-          <Route exact path="/" component={Main} />
-          <Route exact path="/search" component={Search} />
-          <Route path="/anime/:id" component={Anime} />
+          <Switch>
+            <Route exact path="/" component={Main} />
+            <Route exact path="/search" component={Search} />
+            <Route path="/anime/:id" component={Anime} />
+          </Switch>
         </div>
-      </Router>
+      </HashRouter>
     </MuiThemeProvider>
   );
 }

@@ -67,7 +67,7 @@ class Main extends React.Component{
                 {this.state.values.map(value => (
                     <Grid item
                     key={`${value.mal_id} ITEM`}
-                    xs={12} sm={6}
+                    xs
                     >
                         <Card
                         key={`${value.mal_id} CARD`}
