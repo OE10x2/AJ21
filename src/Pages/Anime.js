@@ -18,7 +18,6 @@ class Anime extends React.Component{
     };
 
     async componentDidMount(){
-        //First load the userList
         const general = await jikanjs.loadAnime(this.props.match.params.id);
         const stats = await jikanjs.loadAnime(this.props.match.params.id, 'stats');
         this.setState({general: general, stats: stats});
@@ -42,9 +41,6 @@ class Anime extends React.Component{
                 <Typography variant="h6" color="primary">{this.state.general.score}</Typography>
                 <Typography paragraph>
                     {this.state.general.synopsis}
-                </Typography>
-                <Typography color="primary">
-                    {this.state.stats.scores["1"].votes} {this.state.general.aired.string}
                 </Typography>
                 <img
                 src={this.state.general.image_url}

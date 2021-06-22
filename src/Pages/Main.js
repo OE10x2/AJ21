@@ -65,10 +65,7 @@ class Main extends React.Component{
             spacing={2}
             >
                 {this.state.values.map(value => (
-                    <Grid item
-                    key={`${value.mal_id} ITEM`}
-                    xs
-                    >
+                    <Grid item xs key={`${value.mal_id} ITEM`}>
                         <Card
                         key={`${value.mal_id} CARD`}
                         className={classes.content}
@@ -79,7 +76,7 @@ class Main extends React.Component{
                             />
                             <div className={classes.nonMedia}>
                                 <CardContent>
-                                    <Typography variant="body2">
+                                    <Typography color="secondary" variant="body2">
                                         {value.type}
                                     </Typography>
                                     <Typography color="primary" variant="h5">
@@ -89,8 +86,8 @@ class Main extends React.Component{
                                 <CardActions>
                                     <Link to={`/anime/${value.mal_id}`}>
                                         <Button
-                                        variant="outlined"
-                                        color="secondary"
+                                        variant="contained"
+                                        color="primary"
                                         startIcon={<MoreHorizIcon />}
                                         className={classes.button}
                                         >
