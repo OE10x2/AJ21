@@ -1,4 +1,4 @@
-import {BrowserRouter as Router, Route} from 'react-router-dom';
+import {HashRouter as Router, Route} from 'react-router-dom';
 import {createMuiTheme, MuiThemeProvider} from '@material-ui/core';
 import Main from './Pages/Main';
 import Search from './Pages/Search';
