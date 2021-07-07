@@ -1,7 +1,6 @@
 import React from 'react';
 import { withRouter, Link } from "react-router-dom";
 import { withStyles } from '@material-ui/core/styles';
-import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import Card from '@material-ui/core/Card';
 import CardMedia from '@material-ui/core/CardMedia';
@@ -76,12 +75,11 @@ class Main extends React.Component{
                             />
                             <div className={classes.nonMedia}>
                                 <CardContent>
-                                    <Typography color="secondary" variant="body2">
-                                        {value.type}
-                                    </Typography>
-                                    <Typography color="primary" variant="h5">
-                                        {value.title}
-                                    </Typography>
+                                {value.type} {value.mal_id}
+                                <h2 style={{ color: '#0051A5' }}>
+                                    {value.title}
+                                </h2>
+                                {value.watched_episodes}/{value.total_episodes}
                                 </CardContent>
                                 <CardActions>
                                     <Link to={`/anime/${value.mal_id}`}>
@@ -89,7 +87,6 @@ class Main extends React.Component{
                                         variant="contained"
                                         color="primary"
                                         startIcon={<MoreHorizIcon />}
-                                        className={classes.button}
                                         >
                                             LEARN MORE
                                         </Button>
