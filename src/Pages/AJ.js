@@ -1,7 +1,7 @@
 import React from 'react';
 import { useEasybase } from 'easybase-react';
 import { Link } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { makeStyles } from '@material-ui/core';
 import Grid from '@material-ui/core/Grid';
 import Card from '@material-ui/core/Card';
@@ -43,20 +43,11 @@ const useStyles = makeStyles({
 });
 
 export default function AJ() {
-    const [easybaseData, setEasybaseData] = useState([]);
     const [open, setOpen] = useState(false);
     const [newItemID, setNewItemID] = useState("");
-    const { db } = useEasybase();
+    const { db, useReturn } = useEasybase();
+    const { frame } = useReturn(() => db('AJ21').return());
     const classes = useStyles();
-
-    const mounted = async() => {
-        const ebData = await db('AJ21').return().all();
-        setEasybaseData(ebData);
-    }
-
-    useEffect(() => {
-        mounted();
-    });
 
     const handleAddItemDialogOpen = () => setOpen(true);
 
@@ -69,7 +60,7 @@ export default function AJ() {
             await db('AJ21').insert({
                 malid: anime.mal_id,
                 malscore: anime.score,
-                titleeng: anime.title_english,
+                titleeng: anime.title,
                 episodes: anime.episodes,
                 imageurl: anime.image_url,
             }).one();
@@ -108,7 +99,7 @@ export default function AJ() {
             direction="row"
             spacing={2}
             >
-                {easybaseData.map(value => (
+                {frame.map(value => (
                     <Grid item xs key={`${value.malid} ITEM`}>
                         <Card
                         key={`${value.malid} CARD`}
