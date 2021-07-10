@@ -11,6 +11,7 @@ import CardContent from '@material-ui/core/CardContent';
 import CardActions from '@material-ui/core/CardActions';
 import Button from '@material-ui/core/Button';
 import MoreHorizIcon from '@material-ui/icons/MoreHoriz';
+import DeleteIcon from '@material-ui/icons/Delete';
 import TextField from '@material-ui/core/TextField';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
@@ -45,7 +46,7 @@ const useStyles = makeStyles({
 export default function AJ() {
     const [open, setOpen] = useState(false);
     const [newItemID, setNewItemID] = useState("");
-    const { db, useReturn } = useEasybase();
+    const { db, e, useReturn } = useEasybase();
     const { frame } = useReturn(() => db('AJ21').return());
     const classes = useStyles();
 
@@ -66,7 +67,12 @@ export default function AJ() {
             }).one();
             setOpen(false);
         }
-    }
+    };
+
+    const handleRemoveItem = async(id) => {
+        console.log(id);
+        await db('AJ21').delete().where(e.eq("malid", id)).all();
+    };
   
     return(
         <React.Fragment>
@@ -121,13 +127,19 @@ export default function AJ() {
                                 <CardActions>
                                     <Link to={`/anime/${value.malid}`}>
                                         <Button
-                                        variant="contained"
                                         color="primary"
                                         startIcon={<MoreHorizIcon />}
                                         >
                                             LEARN MORE
                                         </Button>
                                     </Link>
+                                    <Button
+                                    color="secondary"
+                                    startIcon={<DeleteIcon />}
+                                    onClick={() => handleRemoveItem(value.malid)}
+                                    >
+                                        Remove
+                                    </Button>
                                 </CardActions>
                             </div>
                         </Card>
